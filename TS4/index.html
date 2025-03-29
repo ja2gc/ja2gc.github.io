@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant Guide</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      color: white;
+      font-family: Arial, sans-serif;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    
+    .header {
+      text-align: left;
+      font-family: 'Pacifico', cursive;
+      padding: 0 0 0 20px;
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 20px 0;
+      color: rgb(101, 255, 250);
+    }
+    .produced {
+        text-align: left;
+        font-weight: bold;
+        padding: 0 0 0 50px;
+        margin: 20px 0;
+        color: rgb(255, 255, 255);
+    }
+    .restaurant-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+      padding-bottom: 30px;
+    }
+    .restaurant-box {
+      width: 200px;
+      height: 500px;
+      background-color: #fff;
+      color: black;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+    }
+    .restaurant-box img {
+      width: 100%;
+      height: 465px;
+      object-fit: cover;
+    }
+    .restaurant-box .title {
+      background-color: yellow;
+      font-weight: bold;
+      padding: 5px 0;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      text-align: center;
+      padding-top: 30px;
+      z-index: 999;
+      overflow: auto;
+    }
+    .popup-content {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      background: transparent;
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 10px;
+      position: relative;
+    }
+    .popup-left {
+      position: relative;
+      flex: 1 1 40%;
+      min-width: 300px;
+      overflow: hidden;
+      border-radius: 10px 0 0 10px;
+    }
+    .popup-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px 0 0 10px;
+    }
+    .vertical-label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: yellow;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+      font-weight: bold;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+    .popup-right {
+      flex: 1 1 60%;
+      min-width: 300px;
+      background: #fff;
+      color: black;
+      padding: 20px;
+      border-radius: 0 10px 10px 0;
+    }
+    .popup-right h2 {
+      color: red;
+      margin-bottom: 10px;
+    }
+    .popup-right .notes {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: black;
+    }
+    .close-btn {
+      margin-top: 20px;
+      cursor: pointer;
+      color: #fff;
+      background-color: #f00;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+    .close-btn:hover {
+      background-color: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Restaurant Background" class="background-image" />
+  <div class="header">RESTAURANT GUIDE</div>
+  <div class ="produced">PRODUCED BY: LOCAL MAGAZINE</div>
+  <div class="restaurant-container">
+    <div class="restaurant-box" data-restaurant="Gabel Loffel">
+      <img src="https://images.pexels.com/photos/3434523/pexels-photo-3434523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gabel Loffel" />
+      <div class="title">GABEL LOFFEL</div>
+    </div>
+    <div class="restaurant-box" data-restaurant="GARY GARI">
+      <img src="https://images.pexels.com/photos/2122294/pexels-photo-2122294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="GARY GARI" />
+      <div class="title">GARY GARI</div>
+    </div>
+    <div class="restaurant-box" data-restaurant="IL PIATTO">
+      <img src="https://images.pexels.com/photos/5903271/pexels-photo-5903271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="IL PIATTO" />
+      <div class="title">IL PIATTO</div>
+    </div>
+    <div class="restaurant-box" data-restaurant="PIERRE PLATTERS">
+      <img src="https://images.pexels.com/photos/28056719/pexels-photo-28056719/free-photo-of-a-table-with-several-different-types-of-food-on-it.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="PIERRE PLATTERS" />
+      <div class="title">PIERRE PLATTERS</div>
+    </div>
+  </div>
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <div class="popup-left">
+        <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Restaurant Image" />
+        <div class="vertical-label" id="popup-vertical-label">Guide</div>
+      </div>
+      <div class="popup-right">
+        <h2 id="popup-name">Peri Pallettes</h2>
+        <div class="notes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Nunc lorem enim, dapibus ac mauris sed, fermentum tempus felis. Mauris lacinia purus 
+          orci. Aenean ut pellentesque ex, et interdum justo. Nunc lectus dolor, ornare ac arcu 
+          ac, fringilla lacinia elit. Aenean euismod luctus orci. Maecenas eu magna malesuada, 
+          iaculis nisi sed, varius nisl. Integer dignissim in lectus a porttitor. Curabitur 
+          interdum elit at nunc gravida, sit amet semper nunc cursus. Morbi et eros commodo, 
+          vehicula lectus eu, viverra elit. Phasellus iaculis, orci et porttitor dignissim, 
+          felis nisl finibus ex, et volutpat risus sem vitae massa. Quisque ut ornare odio. 
+          Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+          Nullam quis felis vel lacus sodales accumsan rhoncus ac mi. Cras congue, mauris a euismod
+           consequat, mauris ante condimentum risus, sit amet porttitor purus enim ut sem. 
+           Pellentesque magna velit, eleifend a ornare at, efficitur a massa.</div>
+        <button class="close-btn" onclick="closePopup()">Main Menu</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('.restaurant-box').on('click', function() {
+        var restaurant = $(this).data('restaurant');
+        $('#popup-name').text(restaurant);
+        $('#popup').fadeIn();
+      });
+    });
+    function closePopup() {
+      $('#popup').fadeOut();
+    }
+  </script>
+</body>
+</html>
